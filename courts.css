@@ -1,0 +1,53 @@
+.courts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Court */
+.court {
+    position: relative;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    overflow: hidden; /* To hide any overflow from the image */
+}
+
+/* Court Image */
+.court-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Make the image cover the entire area */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Ensure the image stays in the background */
+}
+
+/* Court Description */
+.court-description {
+    position: absolute;
+    top: 20px; /* Move description near the top */
+    left: 50%;
+    transform: translateX(-50%); /* Center description horizontally */
+    background: rgba(0, 0, 0, 0.7); /* Dark background for readability */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    width: 80%; /* Make the description box 80% of the width */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1; /* Ensure description appears on top of the image */
+}
+
+/* Hidden Description */
+.hidden {
+    opacity: 0;
+}
+
+/* Show Description When Court is In View */
+.court .court-description.show {
+    opacity: 1;
+}

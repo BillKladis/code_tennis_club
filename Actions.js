@@ -1,4 +1,4 @@
-document.querySelectorAll(".log_in").forEach(button => {
+document.querySelectorAll("#connection").forEach(button => {
     button.addEventListener("click", log_in);
 });
 function loadModalCSS() {
@@ -31,7 +31,7 @@ function log_in(event) {
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="login-form" autocomplete="off">  <!-- ✅ Added autocomplete="off" -->
+                <form id="login-form" autocomplete="off">  
                     <div class="form-group">
                         <label for="username">Όνομα Χρήστη</label>
                         <input type="text" id="username" name="username" autocomplete="username" required>
@@ -40,11 +40,11 @@ function log_in(event) {
                         <label for="password">Κωδικός</label>
                         <input type="password" id="password" name="password" autocomplete="current-password" required>
                     </div>
-                    <button type="submit" class="login-btn">Login</button>
+                    <button type="submit" class="login-btn">Σύνδεση</button>
                     <a href="#" class="forgot-password">Ξέχασες τον κωδικό σου?</a>
                 </form>
                 <div class="signup-option">
-                    <p>Don't have an account? <a href="#">Sign up</a></p>
+                    <p>Ακόμα δεν είσαι μέλος? <a href="#">Εγγραφή</a></p>
                 </div>
             </div>
         `;
@@ -57,7 +57,7 @@ function log_in(event) {
     
         // Close modal only if clicking the background or close button
         overlay.addEventListener("click", (event) => {
-            if (event.target === overlay || event.target.classList.contains("close-modal")) {
+            if (event.target === overlay || event.target == document.querySelector(".close-modal")) {
                 overlay.classList.remove("active");
                 setTimeout(() => overlay.remove(), 300);
             }
@@ -82,3 +82,37 @@ function log_in(event) {
     // Open the modal
     createModal();
 }
+document.getElementById("load-courts").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default anchor behavior
+
+    fetch("courts.html") // Load the courts page
+        .then(response => response.text()) // Convert response to text
+        .then(data => {
+            document.getElementById("main-content").innerHTML = data; // Replace content
+
+            // Load courts.js after inserting new content
+            const script = document.createElement("script");
+            script.src = "courts.js";
+            document.body.appendChild(script);
+        });
+});
+
+document.getElementById("load-courts").addEventListener("click", function (event) {
+    event.preventDefault();
+    
+    fetch("courts.html")
+        .then(response => response.text())
+        .then(data => {
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = data;
+
+            const newContent = tempDiv.querySelector("body").innerHTML; 
+            document.getElementById("main-content").innerHTML = newContent;  
+
+            // Load courts.js dynamically AFTER inserting HTML
+            const script = document.createElement("script");
+            script.src = "courts.js";
+            script.defer = true;
+            document.body.appendChild(script);
+        });
+});
