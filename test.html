@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+    <html lang="el">
+    <head>
+    <meta charset="UTF-8">
+    <title>Calendar Demo</title>
+
+    <!-- 1) FullCalendar core CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
+
+    <!-- 2) Plugin DayGrid (global) -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js"></script>
+    <!-- 3) Plugin TimeGrid (global) -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/index.global.min.js"></script>
+    <!-- 3) Το μίνι JS μας -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // 4) Πιάσε το div
+        const calendarEl = document.getElementById('calendar');
+        // 5) Δημιούργησε το calendar
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            plugins: [ FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin ],
+            selectable: true,
+            events: [
+            { title: 'Demo Event', start: new Date().toISOString().slice(0,10) }
+            ]
+        });
+        calendar.render();
+        });
+    </script>
+
+    <style>
+        /* Βάζουμε λίγο ύψος για να το δούμε */
+        #calendar { max-width: 800px; margin: 40px auto; }
+    </style>
+    </head>
+    <body>
+    <div id="calendar"></div>
+    </body>
+    </html>
